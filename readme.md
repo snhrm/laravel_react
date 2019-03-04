@@ -69,15 +69,9 @@ PHP 7.2.3 をインストール
 ```bash
 phpbrew self-update
 phpbrew known --update
-php -d memory_limit=-1 /usr/local/bin/phpbrew install 7.2.3 +default +mysql +opcache +iconv +tokenizer +openssl=$(brew --prefix openssl) +exif
+php -d memory_limit=-1 /usr/local/bin/phpbrew install 7.2.3 +default +mysql +opcache +iconv +openssl=$(brew --prefix openssl) +intl
 
 phpbrew switch php-7.2.3
-CXXFLAGS="-std=c++11 -stdlib=libc++" phpbrew ext install intl
-phpbrew ext install gd -- --with-jpeg-dir=/usr/local/Cellar/jpeg/8d/lib
-phpbrew ext install xdebug
-phpbrew ext install opcache
-pecl install mcrypt channel://pecl.php.net/mcrypt-1.0.1
-phpbrew ext enable mcrypt
 
 # PHPのパッケージ管理ツール
 phpbrew app get composer
@@ -86,7 +80,7 @@ phpbrew app get composer
 php.ini を編集
 
 ```bash
-vi ~/.phpbrew/php/php-7.2.1/etc/php.ini
+vi ~/.phpbrew/php/php-7.2.3/etc/php.ini
 ```
 
 ```ini
@@ -103,7 +97,6 @@ PHP 7.2.3 (cli) (built: Dec  5 2018 11:16:47) ( NTS )
 Copyright (c) 1997-2018 The PHP Group
 Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
     with Zend OPcache v7.2.3, Copyright (c) 1999-2018, by Zend Technologies
-    with Xdebug v2.6.1, Copyright (c) 2002-2018, by Derick Rethans
 ```
 
 ### node のインストール
@@ -140,6 +133,7 @@ composer require global laravel/installer
 composer create-project --prefer-dist laravel/laravel <app_name> "5.8.*"
 
 # phpのサーバー起動
+cd <app_name>
 php artisan serve
 
 http://127.0.0.1:8000
