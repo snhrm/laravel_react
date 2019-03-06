@@ -15,4 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/schedules', 'SchedulesController@index');
+Route::get('/schedules', function () {
+    return view('schedules/index');
+});
